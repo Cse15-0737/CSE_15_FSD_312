@@ -1,0 +1,53 @@
+Synchronous programming in JS
+Synchronous is a blocking architecture, so the execution of each operation is dependent on the completetion.
+Example-
+function sum() {
+    console.log("2");
+}
+function example() {
+    console.log("1");
+    sum();
+    console.log("3");
+}
+
+example();
+// Output: 1, 2, 3  (each step waits for the previous one to finish)
+
+
+Asynchronous is a non blocking architecture, so the execution of one task isn't dependent on another. Tasks can run
+simultaneously.
+Example-
+
+function sum() {
+    setTimeout(() => {
+        console.log("2");
+    }, 2000);
+}
+function example() {
+    console.log("1");
+    sum();          // must be called with (), otherwise it never runs
+    console.log("3");
+}
+example();
+// Output: 1, 3, 2  (setTimeout callback runs later, without blocking the rest of the code)
+#--------------------##--------------------#
+Promise: It's an object in which 
+it has three stages,
+1.Pending :- Work is in process
+2.Fullfilled:- Work is completed
+3.Reject:- Work is Rejected.
+Example
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const success = true; // simulate whether the operation worked
+
+        if (success) {
+            resolve("found data");
+        } else {
+            reject("data not found");
+        }
+    }, 2000);
+});
+promise.then((result) => {
+         console.log(result);
+});
